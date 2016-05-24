@@ -2,8 +2,8 @@
  * Created by anwmohamed on 5/22/2016.
  */
 
-istrahtiApp.controller('AdminLoginController',['$scope', '$location',
-    function ($scope, $location ) {
+istrahtiApp.controller('AdminLoginController',['$scope', '$location','$cookieStore',
+    function ($scope, $location ,$cookieStore,AdminService) {
         debugger
         var url = $location.absUrl();
 
@@ -20,8 +20,9 @@ istrahtiApp.controller('AdminLoginController',['$scope', '$location',
             debugger
             var url = $location.absUrl();
 
+        //  var gatData=  AdminService.doAdminLogin(data);
 
-            //   $cookieStore.put('token', token);
+
             //  $cookieStore.put('loggedInUser', $scope.UserName);
 
             if($scope.UserName ==='a' && $scope.Password=='123'){
@@ -30,7 +31,9 @@ istrahtiApp.controller('AdminLoginController',['$scope', '$location',
                 $(".main-footer").show();
                 $(".content-wrapper").show();
                 $(".control-sidebar").show();
-                $location.path('/blank');
+
+                $cookieStore.put('token', 'anwar');
+
             }
 
             else{
@@ -40,6 +43,17 @@ istrahtiApp.controller('AdminLoginController',['$scope', '$location',
            // $("#footer").show();
            // $location.path('/ForbiddenDerestrictServices');
         };
-        
+
+
+        $scope.AdminLogOut=function () {
+            debugger;
+            $cookieStore.remove('token');
+
+            $(".main-footer").hide();
+            $(".content-wrapper").hide();
+            $(".control-sidebar").hide();
+        }
         
 }]);
+
+
